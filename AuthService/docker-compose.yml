@@ -1,0 +1,12 @@
+services:
+  postgres:            # нужен только примеру Crm.Contacts; AuthService использует LiteDB-файл
+    image: postgres:17
+    environment:
+      POSTGRES_USER: crm
+      POSTGRES_PASSWORD: crm
+      POSTGRES_DB: crm_contacts
+    ports: ["5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:

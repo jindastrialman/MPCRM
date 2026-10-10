@@ -1,5 +1,7 @@
+using AuthService.Security;
 using DataService.Models;
 using DataService.Services.DataAccess;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,5 +18,9 @@ namespace DataService.Controllers.Abstractions
             _logger = logger;
             _dataProviderService = dataProviderService;
         }
+
+        [HttpGet("rand")]
+        [Authorize(Permissions.ContactsWrite)]
+        public string GetRandomNumber() => "67";
     }
 }
