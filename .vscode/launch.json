@@ -5,11 +5,29 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C#: DataService Debug",
+            "name": "AuthGateway",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/AuthService/AuthService.Gateway/AuthService.Gateway.csproj"
+        },
+        {
+            "name": "AuthService",
+            "type": "dotnet",
+            "request": "launch",
+            "projectPath": "${workspaceFolder}/AuthService/AuthService.Core/AuthService.Core.csproj"
+        },
+        {
+            "name": "DataService",
             "type": "dotnet",
             "request": "launch",
             "projectPath": "${workspaceFolder}/DataService/DataService.csproj"
         }
-
-    ]
+    ],
+    "compounds": [
+    {
+      "name": "CRM: все сервисы",
+      "configurations": ["AuthGateway", "AuthService", "DataService"],
+      "stopAll": true
+    }
+  ]
 }

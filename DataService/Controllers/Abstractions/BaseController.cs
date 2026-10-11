@@ -9,18 +9,15 @@ namespace DataService.Controllers.Abstractions
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BaseController<T> : ControllerBase where T : BaseDatabaseEntity //mean to be abstract
+    [Authorize]
+    public abstract class BaseController<T> : ControllerBase where T : BaseDatabaseEntity //mean to be abstract
     {
         private readonly ILogger<BaseController<T>> _logger;
         private readonly IDataProviderService<T> _dataProviderService;
-        public BaseController(ILogger<BaseController<T>> logger, IDataProviderService<T> dataProviderService)
+        public BaseController(ILogger<BaseController<T>> logger/*, IDataProviderService<T> dataProviderService*/)
         {
             _logger = logger;
-            _dataProviderService = dataProviderService;
+            //_dataProviderService = dataProviderService;
         }
-
-        [HttpGet("rand")]
-        [Authorize(Permissions.ContactsWrite)]
-        public string GetRandomNumber() => "67";
     }
 }

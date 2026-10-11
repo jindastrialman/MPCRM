@@ -5,10 +5,10 @@ namespace DataService.Models;
 public abstract class BaseDatabaseEntity
 {
     [Key]
-    public bool Id{get; set;}
+    public int Id{get; set;}
     public bool IsDeleted{get; set;}
-    public bool Version{get; set;}
-    public bool UpdatedAt{get; set;}
-    public bool CreatedAt{get; set;}
+    public int Version{get; set;}
+    public DateTime UpdatedAt{get; set;}
+    public DateTime CreatedAt{get; set;}
 
 }
