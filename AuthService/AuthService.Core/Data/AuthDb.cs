@@ -17,7 +17,7 @@ public sealed class AuthDb : IDisposable
 
     public AuthDb(IConfiguration config)
     {
-        var cs = new ConnectionString(config.GetConnectionString("Auth") ?? "Filename=data/auth.db");
+        var cs = new ConnectionString(config.GetConnectionString("Auth") ?? "Filename=bin/data/auth.db");
 
         var dir = Path.GetDirectoryName(Path.GetFullPath(cs.Filename));
         if (!string.IsNullOrEmpty(dir))

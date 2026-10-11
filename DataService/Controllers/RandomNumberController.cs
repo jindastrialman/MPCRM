@@ -16,6 +16,10 @@ namespace DataService.Controllers.Abstractions
         [HttpGet("rand")]
         [Authorize(Policy = Permissions.ContactsWrite)]
         public string GetRandomNumber() => "67";
+
+        [HttpGet("semirand")]
+        [AllowAnonymous] 
+        public string GetSemiRandomNumber() => "69";
     }
 
     public class RandomNumber : BaseDatabaseEntity

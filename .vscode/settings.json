@@ -1,3 +1,4 @@
 {
-    "dotnet.defaultSolution": "CRM.slnx"
+    "dotnet.defaultSolution": "CRM.slnx",
+    "csharp.debug.justMyCode": false
 }
