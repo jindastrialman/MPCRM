@@ -5,6 +5,7 @@ using AuthService.Endpoints;
 using AuthService.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,30 @@ builder.Services.AddRateLimiter(o =>
         }));
 });
 
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(o =>
+{
+    o.SwaggerDoc("v1", new OpenApiInfo { Title = "Contacts API", Version = "v1" });
+
+    // Определение схемы: создаёт кнопку Authorize
+    o.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Вставьте accessToken из POST /auth/login (слово Bearer писать не нужно)",
+    });
+
+    // Требование: теперь принимает функцию от документа, а ссылка делается через OpenApiSecuritySchemeReference
+    o.AddSecurityRequirement(document => new OpenApiSecurityRequirement
+    {
+        [new OpenApiSecuritySchemeReference("Bearer", document)] = []
+    });}
+);
+
+
 var app = builder.Build();
 
 // Открываем БД и создаём индексы при старте, а не при первом запросе
@@ -50,6 +75,13 @@ app.Services.GetRequiredService<AuthDb>();
 app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 
 app.MapAuth();
 app.MapGet("/health", () => Results.Ok("healthy"));

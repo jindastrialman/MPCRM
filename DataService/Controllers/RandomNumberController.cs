@@ -1,6 +1,6 @@
 using AuthService.Security;
 using DataService.Models;
-using DataService.Services.DataAccess;
+using DataService.Services.DataAccess.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
