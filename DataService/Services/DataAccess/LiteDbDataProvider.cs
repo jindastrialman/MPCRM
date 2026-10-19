@@ -1,5 +1,5 @@
 using System.Collections.ObjectModel;
-using DataService.Models;
+using DataService.Models.Abstractions;
 using Framework.Query;
 using LiteDB;
 

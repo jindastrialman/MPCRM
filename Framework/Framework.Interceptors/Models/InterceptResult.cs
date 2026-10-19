@@ -5,8 +5,13 @@ namespace Framework.Interceptors.Models;
 
 public class InterceptResult<T>
 {
-    public QueryParameters<T>? QueryParameters{get; init;}
+    public QueryParameters<T> QueryParameters{get; init;}
     public InterceptStatus InterceptStatus{get; init;}
+    public void Deconstruct(out QueryParameters<T> queryParameters, out InterceptStatus interceptStatus)
+    {
+        queryParameters = QueryParameters;
+        interceptStatus = InterceptStatus;
+    }
 }
 public enum InterceptStatus
 {

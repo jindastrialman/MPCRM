@@ -1,10 +1,10 @@
 using AuthService.Security;
-using DataService.Models;
+using DataService.Models.Abstractions;
 using DataService.Services.DataAccess;
 using DataService.Services.DataAccess.Abstractions;
+using Framework.Interceptors.Abstractions;
 using Framework.Query;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DataService.Controllers.Abstractions
@@ -16,7 +16,7 @@ namespace DataService.Controllers.Abstractions
     {
         private readonly ILogger<BaseController<T>> _logger;
         private readonly IDataProviderService<T> _dataProviderService;
-        public BaseController(ILogger<BaseController<T>> logger, IDataProviderService<T> dataProviderService)
+        public BaseController(ILogger<BaseController<T>> logger, IDataProviderService<T> dataProviderService, IRequestInterceptorService<T> requestInterceptorService)
         {
             _logger = logger;
             _dataProviderService = dataProviderService;

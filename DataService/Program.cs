@@ -1,4 +1,6 @@
 using AuthService.Security;
+using DataService.Models;
+using Framework.Interceptors.Extensions;
 using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +29,8 @@ builder.Services.AddSwaggerGen(o =>
 );
 
 builder.Services.AddAuthServiceSecurity(builder.Configuration);
+
+builder.Services.AddInterceptorService<ItemInfo>(builder.Configuration);
 
 
 var app = builder.Build();

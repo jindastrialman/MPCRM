@@ -8,5 +8,8 @@
     <ItemGroup>
       <ProjectReference Include="..\Framework.Query\Framework.Query.csproj" />
       <ProjectReference Include="..\Framework.DataAccess\Framework.DataAccess.csproj" />
+      <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.13" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.13" />
+      <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.13" />
     </ItemGroup>
 </Project>
