@@ -1,8 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using Framework.DataAccess.Models;
 
 namespace DataService.Models;
 
-public abstract class BaseDatabaseEntity
+public abstract class BaseLiteDbModel : IBaseEntity
 {
     [Key]
     public int Id{get; set;}

@@ -12,7 +12,7 @@ namespace DataService.Controllers.Abstractions
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public abstract class BaseController<T> : ControllerBase where T : BaseDatabaseEntity //mean to be abstract
+    public abstract class BaseController<T> : ControllerBase where T : BaseLiteDbModel //mean to be abstract
     {
         private readonly ILogger<BaseController<T>> _logger;
         private readonly IDataProviderService<T> _dataProviderService;

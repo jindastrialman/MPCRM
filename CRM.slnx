@@ -2,6 +2,7 @@
   <Project Path="DataService\DataService.csproj" />
   <Project Path="Framework/Framework.Query/Framework.Query.csproj" />
   <Folder Name="/Framework/">
+    <Project Path="Framework/Framework.DataAccess/Framework.DataAccess.csproj" />
     <Project Path="Framework/Framework.Interceptors/Framework.Interceptors.csproj" />
   </Folder>
   <Project Path="AuthService\AuthService.Core\AuthService.Core.csproj" />

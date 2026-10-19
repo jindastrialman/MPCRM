@@ -4,10 +4,16 @@ namespace Framework.Query;
 
 public class QueryParameters<T>
 {
+    public AuthParameters? AuthParameters{get;init;}
     public PagingParameters? PagingParameters{get; init;}
     public FilterParameters<T>? FilterParameters{get; init;}
     public DeleteParameters? DeleteParameters{get; init;}
     public CollectionParameters<T>? CollectionParameters{get;init;}
+}
+
+public class AuthParameters
+{
+    public IEnumerable<string> Permissions {get;set;}
 }
 
 public class PagingParameters

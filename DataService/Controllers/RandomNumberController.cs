@@ -22,7 +22,7 @@ namespace DataService.Controllers.Abstractions
         public string GetSemiRandomNumber() => "69";
     }
 
-    public class RandomNumber : BaseDatabaseEntity
+    public class RandomNumber : BaseLiteDbModel
     {
         
     }

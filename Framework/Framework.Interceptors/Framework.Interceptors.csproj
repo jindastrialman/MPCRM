@@ -7,5 +7,6 @@
   </PropertyGroup>
     <ItemGroup>
       <ProjectReference Include="..\Framework.Query\Framework.Query.csproj" />
+      <ProjectReference Include="..\Framework.DataAccess\Framework.DataAccess.csproj" />
     </ItemGroup>
 </Project>

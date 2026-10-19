@@ -15,9 +15,9 @@ public static class AuthServiceClaims
     public const string Permission = "permission";
 }
 
-public static class Permissions
+public static class Permissions //this stuff is ugly, should remake with permissions database
 {
-    public const string HardDelete = "HardDelete";
+    public const string HardDelete = "harddelete";
     public const string ContactsRead = "contacts.read";
     public const string ContactsWrite = "contacts.write";
     public const string DealsRead = "deals.read";

@@ -5,13 +5,13 @@ namespace Framework.Interceptors.Models;
 
 public class InterceptResult<T>
 {
-    public QueryParameters<T>? queryParameters{get; set;}
-    public InterceptStatus InterceptStatus{get; set;}
+    public QueryParameters<T>? QueryParameters{get; init;}
+    public InterceptStatus InterceptStatus{get; init;}
 }
 public enum InterceptStatus
 {
     Allowed,
     Forbidden,
-    ParameterUpdated,
+    ParametersUpdated,
     ExceptionAccured // should be never invoked
 }

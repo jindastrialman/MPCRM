@@ -5,7 +5,7 @@ using LiteDB;
 
 namespace DataService.Services.DataAccess.Abstractions;
 
-public class LiteDbDataProvider<T> : IDataProviderService<T> where T : BaseDatabaseEntity
+public class LiteDbDataProvider<T> : IDataProviderService<T> where T : BaseLiteDbModel
 {
     private ConnectionString _connectionString;
     public LiteDbDataProvider(DatabaseConnectionOptions options)
