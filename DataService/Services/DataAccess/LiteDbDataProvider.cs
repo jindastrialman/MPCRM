@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using DataService.Models;
+using Framework.Query;
 using LiteDB;
 
 namespace DataService.Services.DataAccess.Abstractions;
@@ -14,25 +15,37 @@ public class LiteDbDataProvider<T> : IDataProviderService<T> where T : BaseDatab
         var col = db.GetCollection<T>();
     }
 
-    public CollectionUpdateInfo<T> Add(Collection<T> entitiesToAdd)
+    public QueryResult<T> Add(QueryParameters<T> parameters)
     {
+        if(parameters.CollectionParameters is null)
+            throw new ArgumentNullException();
+
         using var db = new LiteDatabase(_connectionString);
         var collection = db.GetCollection<T>();
-        var changedEntitiesCount = collection.Insert(entitiesToAdd);
+        var changedEntitiesCount = collection.Insert(parameters.CollectionParameters.Collection);
 
-        return new CollectionUpdateInfo<T>(){ChangedCount = changedEntitiesCount};
+        return new QueryResult<T>(){ChangedCount = changedEntitiesCount};
     }
 
-    public int Count(FilterParameters<T> filterParameters)
+    public int Count(QueryParameters<T> parameters)
     {
+        if(parameters.FilterParameters is null)
+            throw new ArgumentNullException();
+
         using var db = new LiteDatabase(_connectionString);
         var collection = db.GetCollection<T>();
-        return collection.Count(); //should support filterParams (it is empty now so who cares)
+        return collection.Count(parameters.FilterParameters.FilterExpression); //should support filterParams (it is empty now so who cares)
     }
 
-    public CollectionUpdateInfo<T> Delete(Collection<T> entitiesToDelete, DeleteParameters? deleteParameters)
+    public QueryResult<T> Delete(QueryParameters<T> parameters)
     {
-        bool isForceDelete = deleteParameters != null && deleteParameters.ForcedDelete; 
+        
+        if(parameters.CollectionParameters is null)
+            throw new ArgumentNullException();
+        
+        var entitiesToDelete = parameters.CollectionParameters.Collection;
+
+        bool isForceDelete = parameters.DeleteParameters != null && parameters.DeleteParameters.ForcedDelete; 
 
         using var db = new LiteDatabase(_connectionString);
         var collection = db.GetCollection<T>();
@@ -52,23 +65,26 @@ public class LiteDbDataProvider<T> : IDataProviderService<T> where T : BaseDatab
             changedEntitiesCount = collection.Update(entitiesToDelete);
         }
 
-        return new CollectionUpdateInfo<T>(){ChangedCount = changedEntitiesCount};
+        return new QueryResult<T>(){ChangedCount = changedEntitiesCount};
     }
 
-    public Collection<T> Get(PagedFilterParameters<T> pagedFilterParameters)
+    public QueryResult<T> Get(QueryParameters<T> parameters)
     {
         using var db = new LiteDatabase(_connectionString);
         var collection = db.GetCollection<T>();
-        return new Collection<T>(collection.Find(x => true).ToList()); //blah blah same as coment in count
+        return new QueryResult<T>(){OutputCollection = new Collection<T>(collection.Find(x => true).ToList())}; //blah blah same as coment in count
     }
 
-    public CollectionUpdateInfo<T> Update(Collection<T> entitiesToUpdate)
+    public QueryResult<T> Update(QueryParameters<T> parameters)
     {
+        if(parameters.CollectionParameters is null)
+            throw new ArgumentNullException();
+
         using var db = new LiteDatabase(_connectionString);
         var collection = db.GetCollection<T>();
 
-        var changedEntitiesCount = collection.Update(entitiesToUpdate);
-        return new CollectionUpdateInfo<T>(){ChangedCount = changedEntitiesCount};
+        var changedEntitiesCount = collection.Update(parameters.CollectionParameters.Collection);
+        return new QueryResult<T>(){ChangedCount = changedEntitiesCount};
     }
 }
 

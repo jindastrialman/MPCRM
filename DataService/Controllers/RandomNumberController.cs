@@ -9,7 +9,7 @@ namespace DataService.Controllers.Abstractions
 {
     public class RandomNumberController : BaseController<RandomNumber>
     {
-        public RandomNumberController(ILogger<BaseController<RandomNumber>> logger) : base(logger/*, IDataProviderService<T> dataProviderService*/)
+        public RandomNumberController(ILogger<BaseController<RandomNumber>> logger, IDataProviderService<RandomNumber> dataProviderService) : base(logger, dataProviderService)
         {
         }
 

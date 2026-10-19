@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="../AuthService/AuthService.Security/AuthService.Security.csproj" />
+  <Project Path="../Framework/Framework.Query/Framework.Query.csproj" />
   <Project Path="DataService.csproj" />
 </Solution>

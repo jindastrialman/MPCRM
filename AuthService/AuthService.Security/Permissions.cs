@@ -17,6 +17,7 @@ public static class AuthServiceClaims
 
 public static class Permissions
 {
+    public const string HardDelete = "HardDelete";
     public const string ContactsRead = "contacts.read";
     public const string ContactsWrite = "contacts.write";
     public const string DealsRead = "deals.read";
@@ -28,7 +29,7 @@ public static class Permissions
     public static readonly string[] All =
     [
         ContactsRead, ContactsWrite, DealsRead, DealsWrite,
-        TasksRead, TasksWrite, UsersManage
+        TasksRead, TasksWrite, UsersManage, HardDelete
     ];
 
     // Роль = набор прав. В токен попадают именно права, в коде проверяем только их.
